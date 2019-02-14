@@ -16,6 +16,11 @@ public class Pokemon {
     int Total;
     List<String> Type;
 
+    String URL;
+    String name;
 
-
+    public Pokemon(String name) {
+        this.name = name;
+        this.URL = String.format("http://img.pokemondb.net/artwork/%s.jpg", name.toLowerCase());
+    }
 }

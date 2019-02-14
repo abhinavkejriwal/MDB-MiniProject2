@@ -27,11 +27,10 @@ public class MainActivity extends AppCompatActivity {
         PokeList.setLayoutManager(pokeListLinear);
 
         //Create Adapter Class.
-        RecyclerView.Adapter PokeListAdapter = new PokeAdapter();
+        //RecyclerView.Adapter PokeListAdapter = new PokeAdapter();
 
         //Set Adapter Class.
-        PokeList.setAdapter(PokeListAdapter);
-
+        //PokeList.setAdapter(PokeListAdapter);
     }
 
     //No need to have a function for RV..
