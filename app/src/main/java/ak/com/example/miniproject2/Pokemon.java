@@ -1,3 +1,4 @@
+/*
 package ak.com.example.miniproject2;
 
 import android.util.Log;
@@ -108,7 +109,8 @@ public class Pokemon {
         return name;
     }
 
-    /*public static void main(String[] args) throws JSONException {
+    */
+/*public static void main(String[] args) throws JSONException {
         String data = "{\"#\":\"460\",\"Attack\":\"92\",\"Defense\":\"75\",\"FlavorText\":\"\",\"HP\":\"90\",\"Sp. Atk\":\"92\",\"Sp. Def\":\"85\",\"Species\":\"Frost Tree Pok\\u00e9mon\",\"Speed\":\"60\",\"Total\":\"494\",\"Type\":[\"Grass\",\"Ice\"]}";
         data = data.replaceAll("\n", "\\n");
         JSONObject attr = new JSONObject(data);
@@ -120,5 +122,84 @@ public class Pokemon {
         System.out.println(p.getDefense());
         System.out.println(p.getAttack());
         System.out.println(p.getTypes());
-    }*/
+    }*//*
+
 }
+*/
+
+package ak.com.example.miniproject2;
+
+public class Pokemon {
+
+    private String name;
+    private int id;
+    private int defense;
+    private int attack;
+    private int hp;
+    private String[] types;
+
+    private int spatk;
+    private int spdef;
+    private int speed;
+    private String species;
+    private int total;
+    private String flavorText;
+
+
+    public Pokemon(String name, int id, int def, int atk, int hp, String[] types, int spatk, int spdef, int speed,
+                   String species, int total, String fT) {
+        this.name = name;
+        this.id = id;
+        this.defense = def;
+        this.attack = atk;
+        this.hp = hp;
+        this.types = types;
+        this.spatk = spatk;
+        this.spdef = spdef;
+        this.speed = speed;
+        this.species = species;
+        this.total = total;
+        this.flavorText = fT;
+    }
+
+    public String[] getTypes() { return types; }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public int getDefense() {
+        return this.defense;
+    }
+
+    public int getAttack() {
+        return this.attack;
+    }
+
+    public int getHP() {
+        return this.hp;
+    }
+
+    public String getFlavorText() {
+        return this.flavorText;
+    }
+
+    public int getTotal() {
+        return this.total;
+    }
+
+    public int getSpatk() { return this.spatk; }
+
+    public int getSpdef() { return this.spdef; }
+
+    public int getSpeed() { return this.speed; }
+
+    public String getSpecies() { return this.species; }
+
+
+}
+
