@@ -24,34 +24,34 @@ public class ProfileActivity extends AppCompatActivity {
         getPokeData.getSerializable("URL");
 
 
-        TextView Name = findViewById(R.id.nameID);
+        TextView Name = findViewById(R.id.nameID2);
         Name.setText((String) getPokeData.getSerializable("Name"));
 
-        TextView Attack = findViewById(R.id.attackID);
+        TextView Attack = findViewById(R.id.attackID2);
         Attack.setText((String) getPokeData.getSerializable("Attack"));
 
-        TextView Flavor = findViewById(R.id.flavorID);
+        TextView Flavor = findViewById(R.id.flavorID2);
         Flavor.setText((String) getPokeData.getSerializable("Flavor"));
 
-        TextView HP = findViewById(R.id.hpID);
+        TextView HP = findViewById(R.id.hpID2);
         HP.setText((String) getPokeData.getSerializable("HP"));
 
-        TextView Number = findViewById(R.id.numberID);
+        TextView Number = findViewById(R.id.numberID2);
         Number.setText((String) getPokeData.getSerializable("Number"));
 
-        TextView SpecialAttack = findViewById(R.id.specialAttackID);
+        TextView SpecialAttack = findViewById(R.id.specialAttackID2);
         SpecialAttack.setText((String) getPokeData.getSerializable("Special Attack"));
 
-        TextView SpecialDefense = findViewById(R.id.specialDefenseID);
+        TextView SpecialDefense = findViewById(R.id.specialDefenseID2);
         SpecialDefense.setText((String) getPokeData.getSerializable("Special Defense"));
 
-        TextView Species = findViewById(R.id.speciesID);
+        TextView Species = findViewById(R.id.speciesID2);
         Species.setText((String) getPokeData.getSerializable("Species"));
 
-        TextView Total = findViewById(R.id.totalID);
+        TextView Total = findViewById(R.id.totalID2);
         Total.setText((String) getPokeData.getSerializable("Total"));
 
-        TextView URL = findViewById(R.id.urlID);
+        TextView URL = findViewById(R.id.urlID2);
         URL.setText((String) getPokeData.getSerializable("URL"));
 
 

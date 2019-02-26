@@ -129,39 +129,47 @@ public class Pokemon {
 
 package ak.com.example.miniproject2;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Pokemon {
 
-    private String name;
-    private int id;
-    private int defense;
-    private int attack;
-    private int hp;
-    private String[] types;
+    public String name;
+    public int id;
+    public int defense;
+    public int attack;
+    public int hp;
+    public String[] types;
 
-    private int spatk;
-    private int spdef;
-    private int speed;
-    private String species;
-    private int total;
-    private String flavorText;
+    public int spatk;
+    public int spdef;
+    public int speed;
+    public String species;
+    public int total;
+    public int flavorText;
 
 
-    public Pokemon(String name, int id, int def, int atk, int hp, String[] types, int spatk, int spdef, int speed,
-                   String species, int total, String fT) {
-        this.name = name;
-        this.id = id;
-        this.defense = def;
-        this.attack = atk;
-        this.hp = hp;
-        this.types = types;
-        this.spatk = spatk;
-        this.spdef = spdef;
-        this.speed = speed;
-        this.species = species;
-        this.total = total;
-        this.flavorText = fT;
+    public Pokemon(String name, JSONObject myJSONdata) {
+        try {
+            this.name = name;
+            this.id = myJSONdata.getInt("#");
+            this.attack = myJSONdata.getInt("Attack");
+            this.defense = myJSONdata.getInt("Defense");
+            this.hp = myJSONdata.getInt("HP");
+            this.spatk = myJSONdata.getInt("Sp. Atk");
+            this.spdef = myJSONdata.getInt("Sp. Def");
+            this.speed = myJSONdata.getInt("Speed");
+            this.species = myJSONdata.getString("Species");
+            this.total = myJSONdata.getInt("Total");
+            this.flavorText = myJSONdata.getInt("FlavorText");
+        } catch (JSONException e) {
+            Log.i("JSON error", "error parsing json data");
+        }
+
     }
-
+/*
     public String[] getTypes() { return types; }
 
     public String getName() {
@@ -198,7 +206,7 @@ public class Pokemon {
 
     public int getSpeed() { return this.speed; }
 
-    public String getSpecies() { return this.species; }
+    public String getSpecies() { return this.species; }*/
 
 
 }

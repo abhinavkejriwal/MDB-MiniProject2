@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -17,36 +20,17 @@ import java.util.ArrayList;
 class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.ViewHolder> {
 
     public Context myContext;
-    public ArrayList<Pokemon> _listOfPokemons;
-    public Pokemon _pokemon;
+    public ArrayList<Pokemon> pokemonArrayList;
+    // public Pokemon _pokemon;
 
 
     //Individual viewHolder object will contain info that I want to be on the cardView.
     //Picture of Pokemon and Name. Will be creating new Viewholder objects.
     //Need to have a subclass.
 
-    public PokeAdapter(Context c, ArrayList<Pokemon> listOfPokemons) {
+    public PokeAdapter(Context c, ArrayList<Pokemon> myPoke) {
         this.myContext = c;
-        this._listOfPokemons = listOfPokemons;
-
-        //Creating a VH for each Pokemon, and putting that into RV.
-        //Need some public fields for the context. We need it to keep track of whatever context we're in, so that
-        // it knows where to pull objetcs and data from.
-        // Need to keep track of the context.
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public View view;
-        public ImageView imageView;
-        public TextView pokeName;
-        public TextView idView;
-
-        public ViewHolder (View v) {
-            super(v);
-            this.imageView = v.findViewById(R.id.pokeImageID);
-            this.pokeName = v.findViewById(R.id.pokeNameID);
-            this.idView = v.findViewById(R.id.text2);
-        }
+        this.pokemonArrayList = myPoke;
     }
 
     @NonNull
@@ -57,14 +41,19 @@ class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.ViewHolder> {
         return vh;
     }
 
-    //ViewHolder Class will contain fields... onClick.
-    // Each individual cardView will have its own onClick listener.
-    //Attaches individual viewHolder objects to
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        final Pokemon myPokemon = _listOfPokemons.get(position);
-        viewHolder.pokeName.setText(myPokemon.getName());
-        viewHolder.idView.setText(Integer.toString(myPokemon.getId()));
+        Pokemon myPokemon = pokemonArrayList.get(position);
+        //final Pokemon myPokemon = _listOfPokemons.get(position);
+        //viewHolder = new ViewHolder(TextView a);
+        TextView myPokeName = (TextView) viewHolder.pokeName;
+        myPokeName.setText(myPokemon.name);
+        Glide.with(myContext)
+                .load("http://img.pokemondb.net/artwork/" + (myPokemon.name).toLowerCase().replace(" ", "").replace("'","").replace("é","e") + ".jpg")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(viewHolder.pokeView);
+
+        // viewHolder.idView.setText(Integer.toString(myPokemon.getId()));
 
         //viewHolder.view.setTe(myPokemon.getName());
         // ADD ID VIEW... viewHolder.id
@@ -73,10 +62,10 @@ class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return _listOfPokemons.size();
+        return pokemonArrayList.size();
     }
 
-    public void onClick(View view) {
+/*    public void onClick(View view) {
         Intent i = new Intent(view.getContext(), ProfileActivity.class);
         i.putExtra("Attack", _pokemon.getAttack());
         i.putExtra("Defense", _pokemon.getDefense());
@@ -87,6 +76,22 @@ class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.ViewHolder> {
         i.putExtra("Total", _pokemon.getTotal());
         myContext.startActivity(new Intent(myContext, ProfileActivity.class));
         view.getContext().startActivity(i);
+    }*/
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        //public View view;
+        public ImageView pokeView;
+        public TextView pokeName;
+        //public TextView idView;
+
+        public ViewHolder (View v) {
+            super(v);
+            v.getContext();
+            System.out.println("Now setting pokename");
+            this.pokeView = v.findViewById(R.id.pokeImageID2);
+            this.pokeName = v.findViewById(R.id.pokeNameID2);
+            //this.idView = v.findViewById(R.id.text2);
+        }
     }
 
 }
