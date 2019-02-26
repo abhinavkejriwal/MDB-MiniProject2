@@ -148,11 +148,25 @@ public class Pokemon {
     public int speed;
     public String species;
     public int total;
-    public int flavorText;
+    public String flavorText;
 
 
-    public Pokemon(String name, JSONObject myJSONdata) {
-        try {
+    public Pokemon(String name, int id, int defense, int attack, int hp, String[] types, int spatk, int spdef, int speed,
+                   String species, int total, String flavorText) {
+
+        this.name = name;
+        this.id = id;
+        this.defense = defense;
+        this.attack = attack;
+        this.hp = hp;
+        this.types = types;
+        this.spatk = spatk;
+        this.spdef = spdef;
+        this.speed = speed;
+        this.species = species;
+        this.total = total;
+        this.flavorText = flavorText;
+/*        try {
             this.name = name;
             this.id = myJSONdata.getInt("#");
             this.attack = myJSONdata.getInt("Attack");
@@ -166,10 +180,10 @@ public class Pokemon {
             this.flavorText = myJSONdata.getInt("FlavorText");
         } catch (JSONException e) {
             Log.i("JSON error", "error parsing json data");
-        }
+        }*/
 
     }
-/*
+
     public String[] getTypes() { return types; }
 
     public String getName() {
@@ -206,7 +220,7 @@ public class Pokemon {
 
     public int getSpeed() { return this.speed; }
 
-    public String getSpecies() { return this.species; }*/
+    public String getSpecies() { return this.species; }
 
 
 }

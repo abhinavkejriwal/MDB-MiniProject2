@@ -17,42 +17,78 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.ViewHolder> {
+public class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.MyViewHolder> {
 
-    public Context myContext;
-    public ArrayList<Pokemon> pokemonArrayList;
+    //public Context myContext;
     // public Pokemon _pokemon;
 
 
     //Individual viewHolder object will contain info that I want to be on the cardView.
     //Picture of Pokemon and Name. Will be creating new Viewholder objects.
     //Need to have a subclass.
+    public ArrayList<Pokemon> pokemonArrayList;
 
-    public PokeAdapter(Context c, ArrayList<Pokemon> myPoke) {
-        this.myContext = c;
-        this.pokemonArrayList = myPoke;
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
+        //public View view;
+        public ImageView pokeView;
+        public TextView pokeName;
+        //public TextView idView;
+
+        public MyViewHolder (View v) {
+            super(v);
+            this.pokeView = v.findViewById(R.id.pokeImageID);
+            this.pokeName = v.findViewById(R.id.pokeNameID);
+            //this.idView = v.findViewById(R.id.text2);
+        }
     }
 
-    @NonNull
+    public PokeAdapter(ArrayList<Pokemon> pokemonArrayList) {
+        this.pokemonArrayList = pokemonArrayList;
+    }
+
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.listdisplay, parent, false);
-        ViewHolder vh = new ViewHolder(v);
+        MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        Pokemon myPokemon = pokemonArrayList.get(position);
-        //final Pokemon myPokemon = _listOfPokemons.get(position);
-        //viewHolder = new ViewHolder(TextView a);
-        TextView myPokeName = (TextView) viewHolder.pokeName;
-        myPokeName.setText(myPokemon.name);
-        Glide.with(myContext)
-                .load("http://img.pokemondb.net/artwork/" + (myPokemon.name).toLowerCase().replace(" ", "").replace("'","").replace("é","e") + ".jpg")
+    public void onBindViewHolder(MyViewHolder viewHolder, int position) {
+        final Pokemon pokemon = pokemonArrayList.get(position);
+        viewHolder.pokeName.setText(pokemon.getName());
+        Glide.with(viewHolder.pokeView.getContext())
+                .load("http://img.pokemondb.net/artwork/" + (pokemon.name).toLowerCase().replace(" ", "").replace("'","").replace("é","e") + ".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.pokeView);
+        viewHolder.pokeName.setText(pokemon.getName());
+        // Pokemon myPokemon = pokemonArrayList.get(position);
+        //final Pokemon myPokemon = _listOfPokemons.get(position);
+        //viewHolder = new ViewHolder(TextView a);
+        //TextView myPokeName = (TextView) viewHolder.pokeName;
+        // myPokeName.setText(pokemon.name);
 
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+                intent.putExtra("name" , pokemon.getName());
+                intent.putExtra("id", pokemon.getId());
+                intent.putExtra("attack", pokemon.getAttack());
+                intent.putExtra("defense", pokemon.getDefense());
+                intent.putExtra("hp", pokemon.getHP());
+                intent.putExtra("types", pokemon.getTypes());
+                intent.putExtra("spatk", pokemon.getSpatk());
+                intent.putExtra("spdef", pokemon.getSpdef());
+                intent.putExtra("speed", pokemon.getSpeed());
+                intent.putExtra("total", pokemon.getTotal());
+                intent.putExtra("flavortext", pokemon.getFlavorText());
+                intent.putExtra("species", pokemon.getSpecies());
+                v.getContext().startActivity(intent);
+            }
+        });
         // viewHolder.idView.setText(Integer.toString(myPokemon.getId()));
 
         //viewHolder.view.setTe(myPokemon.getName());
@@ -78,21 +114,7 @@ class PokeAdapter extends RecyclerView.Adapter<PokeAdapter.ViewHolder> {
         view.getContext().startActivity(i);
     }*/
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        //public View view;
-        public ImageView pokeView;
-        public TextView pokeName;
-        //public TextView idView;
 
-        public ViewHolder (View v) {
-            super(v);
-            v.getContext();
-            System.out.println("Now setting pokename");
-            this.pokeView = v.findViewById(R.id.pokeImageID2);
-            this.pokeName = v.findViewById(R.id.pokeNameID2);
-            //this.idView = v.findViewById(R.id.text2);
-        }
-    }
 
 }
 
